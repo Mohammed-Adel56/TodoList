@@ -41,7 +41,7 @@ router.post("/register", async (req, res) => {
     });
     jwt.sign(
       { email: user.email, id: user._id, name: user.name },
-      process.env.JWT_SECRET,
+      "kjsaiowq458",
       {},
       (err, token) => {
         if (err) throw err;
@@ -78,7 +78,7 @@ router.post("/login", async (req, res) => {
       console.log(password, user.password);
       jwt.sign(
         { email: user.email, id: user._id, name: user.name },
-        process.env.JWT_SECRET,
+        "kjsaiowq458",
         {},
         (err, token) => {
           if (err) throw err;
@@ -113,13 +113,13 @@ router.post("/forgetPassword", async (req, res) => {
     service: "outlook",
 
     auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD,
+      user: "mohamedadel4568@outlook.com",
+      pass: "Mm772000",
     },
   });
   const info = await transporter
     .sendMail({
-      from: process.env.EMAIL, // sender address
+      from: "mohamedadel4568@outlook.com", // sender address
       to: user.email, // list of receivers
       subject: "Reset Password", // Subject line
       html: `<div><h4>Click on The Link to Reset Password </h4><p>${link}</p></div>`, // html body

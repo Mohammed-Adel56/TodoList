@@ -7,7 +7,7 @@ router.get("/get", (req, res) => {
   const { token } = req.cookies;
   if (token) {
     console.log("******************");
-    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
+    jwt.verify(token, "kjsaiowq458", {}, async (err, user) => {
       if (err) throw err;
       console.log(user.id);
       const query = await User.findOne({ _id: user.id }).select("todos");
@@ -25,7 +25,7 @@ router.delete("/delete/:id", (req, res) => {
   console.log(token);
   if (token) {
     console.log("******************");
-    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
+    jwt.verify(token, "kjsaiowq458", {}, async (err, user) => {
       console.log(err);
       if (err) throw err;
       console.log(user.id);
@@ -52,7 +52,7 @@ router.post("/add", (req, res) => {
   console.log(token);
   if (token) {
     console.log("******************");
-    jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
+    jwt.verify(token, "kjsaiowq458", {}, async (err, user) => {
       console.log(err);
       if (err) throw err;
       console.log(user.id);

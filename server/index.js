@@ -8,7 +8,9 @@ const app = express();
 const port = 3000;
 //database connection
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(
+    "mongodb+srv://569mohamedadel2514:Mm772000@cluster0.7lwvkwx.mongodb.net/?retryWrites=true&w=majority"
+  )
   .then(() => console.log("Database is connect"))
   .catch((err) => console.log(err));
 
