@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import UserAuth from "../Context/Auth";
 const Login = () => {
@@ -61,6 +61,11 @@ const Login = () => {
                 {...register("password", { required: true })}
               />
             </Form.Group>
+            <Link to="/login/forgetpassword" className="float-end">
+              Forget Password
+            </Link>
+            <br />
+            <br />
             <Button variant="primary" type="submit">
               Login
             </Button>

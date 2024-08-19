@@ -10,6 +10,8 @@ import UserAuth from "./Context/Auth";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import TodoView from "./pages/TodoView";
+import ForgetPassword from "./components/ForgetPassword";
+import ResetPassword from "./components/ResetPassword";
 axios.defaults.baseURL = "http://localhost:3000/";
 axios.defaults.withCredentials = true;
 function App() {
@@ -35,6 +37,8 @@ function App() {
         <Routes>
           <Route path="/" element={<TodoView />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login/forgetpassword" element={<ForgetPassword />} />
+          <Route path="/resetPassword/:id/:token" element={<ResetPassword />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </UserAuth.Provider>

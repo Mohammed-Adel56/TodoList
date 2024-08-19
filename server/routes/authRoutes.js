@@ -3,6 +3,7 @@ const cors = require("cors");
 const User = require("../modules/user");
 const { comparePassword, handlePassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 //middleware
 router.use(
   cors({
@@ -93,6 +94,59 @@ router.post("/login", async (req, res) => {
         error: "Password don't match",
       });
     }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+//forgetPassword
+router.post("/forgetPassword", async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    res.json({ error: "We could not find This email" });
+  }
+  const token = jwt.sign({ email: user.email, id: user.id }, user.password, {
+    expiresIn: "10m",
+  });
+  const link = `http://localhost:5173/resetPassword/${user.id}/${token}`;
+  const transporter = nodemailer.createTransport({
+    service: "outlook",
+
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+  const info = await transporter
+    .sendMail({
+      from: process.env.EMAIL, // sender address
+      to: user.email, // list of receivers
+      subject: "Reset Password", // Subject line
+      html: `<div><h4>Click on The Link to Reset Password </h4><p>${link}</p></div>`, // html body
+    })
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
+  res.json({
+    message: "Successful link send to your email please Check your email",
+  });
+  // res.json({ message: "Click on the Link", resetPassword: link });
+});
+
+//resetPassword
+router.post("/resetPassword", async (req, res) => {
+  const { id, newPassword, token } = req.body;
+  const user = await User.findById(id);
+  try {
+    jwt.verify(token, user.password, {}, (err, res) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(res);
+    });
+    const newEnPass = await handlePassword(newPassword);
+    user.password = newEnPass;
+    await user.save();
+    res.json({ message: "Successfully Change Password" });
   } catch (err) {
     console.log(err);
   }
