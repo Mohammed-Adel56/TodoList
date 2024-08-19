@@ -6,29 +6,25 @@ const jwt = require("jsonwebtoken");
 router.get("/get", (req, res) => {
   const { token } = req.cookies;
   if (token) {
-    console.log("******************");
     jwt.verify(token, "kjsaiowq458", {}, async (err, user) => {
-      if (err) throw err;
-      console.log(user.id);
+      if (err) {
+        res.json({ error: err });
+      }
       const query = await User.findOne({ _id: user.id }).select("todos");
       res.json(query.todos);
     });
   }
-  //   User.find() //hello
-  //     .then((result) => res.json(result))
-  //     .catch((err) => res.json(err));
 });
 router.delete("/delete/:id", (req, res) => {
   const { id } = req.params;
   const { token } = req.cookies;
-  //   console.log(todo);
-  console.log(token);
+
   if (token) {
-    console.log("******************");
     jwt.verify(token, "kjsaiowq458", {}, async (err, user) => {
-      console.log(err);
-      if (err) throw err;
-      console.log(user.id);
+      if (err) {
+        res.json({ error: err });
+      }
+
       await User.findById(user.id)
         .then(async (user) => {
           if (user && user.todos.length > id) {
@@ -36,7 +32,7 @@ router.delete("/delete/:id", (req, res) => {
 
             await user.save();
           } else {
-            console.log("Index out of bounds or user not found");
+            res.json({ error: "Index out of bounds or user not found" });
           }
         })
         .catch((err) => console.log(err));
@@ -48,14 +44,12 @@ router.delete("/delete/:id", (req, res) => {
 router.post("/add", (req, res) => {
   const todo = req.body.todo;
   const { token } = req.cookies;
-  console.log(todo);
-  console.log(token);
   if (token) {
-    console.log("******************");
     jwt.verify(token, "kjsaiowq458", {}, async (err, user) => {
-      console.log(err);
-      if (err) throw err;
-      console.log(user.id);
+      if (err) {
+        res.json({ error: err });
+      }
+
       const newUp = await User.updateOne(
         { _id: user.id },
         { $push: { todos: todo } }

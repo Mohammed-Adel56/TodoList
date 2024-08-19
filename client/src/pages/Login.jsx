@@ -62,7 +62,7 @@ const Login = () => {
               />
             </Form.Group>
             <Link to="/login/forgetpassword" className="float-end">
-              Forget Password
+              Forget Password?
             </Link>
             <br />
             <br />

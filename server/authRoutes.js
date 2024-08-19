@@ -32,8 +32,6 @@ router.post("/register", async (req, res) => {
       });
     }
     const handlePas = await handlePassword(password);
-    console.log("Password :");
-    console.log(handlePas);
     const user = await User.create({
       name,
       email,
@@ -52,7 +50,7 @@ router.post("/register", async (req, res) => {
       }
     );
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -95,7 +93,7 @@ router.post("/login", async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
@@ -139,7 +137,7 @@ router.post("/resetPassword", async (req, res) => {
   try {
     jwt.verify(token, user.password, {}, (err, res) => {
       if (err) {
-        console.log(err);
+        res.json({ error: err });
       }
       console.log(res);
     });
@@ -148,7 +146,7 @@ router.post("/resetPassword", async (req, res) => {
     await user.save();
     res.json({ message: "Successfully Change Password" });
   } catch (err) {
-    console.log(err);
+    res.json({ error: err });
   }
 });
 
