@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const cors = require("cors");
-const User = require("../modules/user");
+const User = require("./user");
 // const { comparePassword, handlePassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken");
 router.get("/get", (req, res) => {
