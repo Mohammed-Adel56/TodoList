@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 16400;
 //database connection
 mongoose
   .connect(
@@ -23,12 +23,13 @@ mongoose
 //   );
 //   next();
 // });
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/", require("./authRoutes"));
 // app.use("/", require("./todoRoutes"));
-app.listen(port, () =>
+app.listen(63639, () =>
   console.log(`Server is running on port ${port} link http://localhost:${port}`)
 );
