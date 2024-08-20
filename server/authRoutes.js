@@ -6,11 +6,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 //middleware
 router.use(
-  cors({
-    origin: true,
-    credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
-  })
+  cors()
 );
 
 router.get("/", (req, res) => {
