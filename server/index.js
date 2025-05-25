@@ -27,6 +27,9 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.get("/testing",(req,res)=>{
+  return "<h1>TESTING....</h1>"
+})
 
 app.use("/", require("./authRoutes"));
 // app.use("/", require("./todoRoutes"));
