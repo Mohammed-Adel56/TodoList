@@ -31,8 +31,8 @@ app.get("/testing",(req,res)=>{
   return "<h1>TESTING....</h1>"
 })
 
-app.use("/", require("./authRoutes"));
+app.use("/", require("./routes/authRoutes"));
 // app.use("/", require("./todoRoutes"));
-app.listen(63639, () =>
+app.listen(port, () =>
   console.log(`Server is running on port ${port} link http://localhost:${port}`)
 );

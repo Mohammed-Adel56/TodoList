@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const cors = require("cors");
-const User = require("./user");
-const { comparePassword, handlePassword } = require("./auth");
+const User = require("../models/user");
+const { comparePassword, handlePassword } = require("../controllers/auth");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 //middleware
