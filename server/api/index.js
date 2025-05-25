@@ -5,7 +5,10 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-
+// Add validation and connection options
+if (!process.env.MONGO_URL) {
+  throw new Error("MongoDB connection URI is missing!");
+}
 // Database connection (using environment variable)
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
