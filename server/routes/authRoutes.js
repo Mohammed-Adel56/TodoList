@@ -107,9 +107,9 @@ router.post("/forgetPassword", async (req, res) => {
     service: "outlook",
 
     auth: {
-      user: "mohamedadel4568@outlook.com",
-      pass: "Mm772000",
-    },
+    user: process.env.EMAIL, // ← Use environment variables
+    pass: process.env.EMAIL_PASS // ← Not PASSWORD
+  },
   });
   const info = await transporter
     .sendMail({
