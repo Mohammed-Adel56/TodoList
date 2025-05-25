@@ -33,6 +33,4 @@ app.get("/testing",(req,res)=>{
 
 app.use("/", require("./routes/authRoutes"));
 // app.use("/", require("./todoRoutes"));
-app.listen(port, () =>
-  console.log(`Server is running on port ${port} link http://localhost:${port}`)
-);
+module.exports = app; // for Express.js
