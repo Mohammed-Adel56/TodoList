@@ -22,6 +22,6 @@ app.get("/testing", (req, res) => {
 });
 
 // Routes
-app.use("/", require("./routes/authRoutes"));
+app.use("/", require("../routes/authRoutes"));
 
 module.exports = app;
